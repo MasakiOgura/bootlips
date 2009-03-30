@@ -1,0 +1,24 @@
+<div class="sectionh2 index">
+  <h2>××さんのタスク一覧</h2>
+  <%= render(:partial => "common")  %>
+  <table cellspacing="0">
+    <tbody>
+      <tr>
+        <th class="task" scope="col">タスク</th>
+        <th class="due" scope="col">期限</th>
+        <th class="status" scope="col">ステータス</th>
+        <th class="finish" scope="col">完了?</th>
+      </tr>
+<% for task in @tasks -%>
+  <% if task.task_status_id != 0 %>
+     <tr>
+       <th><%= link_to((task.name), :action => :edit, :id => task) %></th>
+       <th><%= h(task.due) %></th>
+       <th><%= h(task.task_status_id) %></th>
+       <th><%= link_to 'x', {:action => :delete,  :id => task },{:confirm => "完了します", :method => "post" }%></th>
+     </tr>
+  <% end %>
+<% end %>
+    </tbody>
+  </table>
+</div>

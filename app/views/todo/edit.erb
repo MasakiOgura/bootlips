@@ -1,0 +1,39 @@
+<div class="sectionh2">
+  <h2>タスクの編集</h2>
+<% form_tag :action => "create", :id => @task do %>
+  <table class="tbl_frame">
+    <tbody>
+      <tr>
+        <th>タスク</th>
+        <td><%= text_field :task, :name, :size => 40 %></td>
+      </tr>
+      <tr>
+        <th>メモ</th>
+        <td><%= text_area :task, :memo %></td>
+      </tr>
+      <tr>
+        <th>タグ</th>
+        <td><%= text_field :task, :tag_id %></td>
+      </tr>
+      <tr>
+        <th>リスト(あとで消す)</th>
+        <td><%= text_field :task, :list_id %></td>
+      </tr>
+      <tr>
+        <th>ユーザ(あとで消す)</th>
+        <td><%= text_field :task, :user_id %></td>
+      </tr>
+      <tr>
+        <th>期限</th>
+        <td><%= text_field :task, :due %></td>
+      </tr>
+      <tr>
+        <th>ステータス</th>
+        <td><%= text_field :task, :task_status_id %></td>
+      </tr>
+
+    </tbody>
+  </table>
+  <%= submit_tag %>
+<% end %>
+</div>
