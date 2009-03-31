@@ -161,8 +161,8 @@ display:block;
 #head .gnav {
 position:absolute;
 top:5px;
-float: right;
-left: 500px;
+text-align:right;
+width: 820px;
 }
 
 #head .gnav li {

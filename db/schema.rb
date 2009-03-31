@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090327065142) do
+ActiveRecord::Schema.define(:version => 20090331043016) do
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
@@ -34,15 +34,17 @@ ActiveRecord::Schema.define(:version => 20090327065142) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "name",            :null => false
-    t.integer  "user_status_id",  :null => false
-    t.integer  "authorized_id",   :null => false
-    t.integer  "infomation_id"
-    t.string   "hashed_password", :null => false
-    t.string   "salt",            :null => false
-    t.string   "user_image"
+    t.string   "login",                     :limit => 40
+    t.string   "name",                      :limit => 100, :default => ""
+    t.string   "email",                     :limit => 100
+    t.string   "crypted_password",          :limit => 40
+    t.string   "salt",                      :limit => 40
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "remember_token",            :limit => 40
+    t.datetime "remember_token_expires_at"
   end
+
+  add_index "users", ["login"], :name => "index_users_on_login", :unique => true
 
 end

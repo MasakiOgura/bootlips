@@ -2,6 +2,12 @@
 # Likewise, all the methods added will be available for all controllers.
 
 class ApplicationController < ActionController::Base
+  protect_from_forgery :secret => 'New-York-is-Mine', :only => :index
+
+  include AuthenticatedSystem
+
+  #before_filter :login_required
+
   helper :all # include all helpers, all the time
 
   # See ActionController::RequestForgeryProtection for details

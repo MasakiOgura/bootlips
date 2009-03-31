@@ -1,5 +1,4 @@
 class TodoController < ApplicationController
-  protect_from_forgery :secret => 'New-York-is-Mine', :only => :index
 
   
   def index
