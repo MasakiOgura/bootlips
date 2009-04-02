@@ -22,6 +22,11 @@
         <th><%= label_tag 'password_confirmation', '確認' %></th>
         <td><%= f.password_field :password_confirmation %></td>
       </tr>
+      <tr>
+        <th><%= label_tag '権限' %></th>
+        <td><%= f.collection_select("authority_id", Authorities.find(:all), :id, :authority_name) %></td>
+      </tr>
+
     </tbody>
   </table>
   <p><%= submit_tag 'サインアップ' %></p>

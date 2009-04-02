@@ -12,14 +12,9 @@ class CreateTasks < ActiveRecord::Migration
       t.timestamps
     end
 
-    Task.create(:name => 'test',
-      :memo => 'memo',
-      :list_id => '1',
-      :user_id => '1',
-      :tag_id => '1',
-      :due => '20080925',
-      :task_status_id => '1'
-    )
+
+    execute "alter table tasks add constraint fk_task_users foreign key (user_id) references users(id)"
+    
   end
 
   def self.down

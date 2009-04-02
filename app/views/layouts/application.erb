@@ -28,13 +28,16 @@
   <div id="wrapper">
     <div id="head">
       <div class="gnav">
-        <%= session[:userName] if session[:userID] %>
+        <%= "ようこそ " + session[:userName] if session[:userID] %>
         <% if session[:userID] %>
           | <%= link_to 'ログアウト', :controller => 'sessions', :action => 'destroy' %>
         <% else %>
           <%= link_to 'ログイン', :controller => 'sessions', :action => 'new'%>
         <% end %>
-          | <%= link_to '管理', :controller => 'users', :action => 'new' %> | グループ移動
+        <% if session[:userAuth] %>
+          | <%= link_to '管理', :controller => 'users', :action => 'new' %>
+        <% end %>
+        | グループ移動
       </div>
       <div class="logo">
         <a href="http://127.0.0.1:3000/todo/"><img src="/images/boo_128.png" alt="Bootlips"></a>

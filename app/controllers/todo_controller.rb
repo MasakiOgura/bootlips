@@ -2,7 +2,7 @@ class TodoController < ApplicationController
 
   
   def index
-    @tasks = Task.find_tasks
+    @tasks = Task.find_tasks(session[:userID])
   end
 
   def new
@@ -25,6 +25,7 @@ class TodoController < ApplicationController
 
   def create
     @task = Task.new(params[:task])
+    @task.user_id = session[:userID]
 
     if @task.save
       redirect_to :action => "index"

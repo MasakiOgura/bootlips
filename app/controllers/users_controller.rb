@@ -23,7 +23,7 @@ class UsersController < ApplicationController
       self.current_user = @user # !! now logged in
       #redirect_to :contoroller => 'todo', :action => 'index'
       redirect_back_or_default('/todo')
-      flash[:notice] = "Thanks for signing up!  We're sending you an email with your activation code."
+      flash[:notice] = "ユーザの追加が完了しました。"
     else
       flash[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact an admin (link is above)."
       #flash[:notice]  = "We couldn't set up that account, sorry.  Please try again, or contact an admin (link is above)."

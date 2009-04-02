@@ -1,0 +1,29 @@
+<div class="sectionh2">
+<h2><span>ログイン</span></h2>
+
+<% form_tag session_path do -%>
+<table>
+  <tbody>
+    <tr>
+      <th><%= label_tag 'ログイン' %></th>
+      <td><%= text_field_tag 'login', @login %></td>
+    </tr>
+    <tr>
+      <th><%= label_tag 'パスワード' %></th>
+      <td><%= password_field_tag 'password', nil %></td>
+    </tr>
+    <tr>
+      <th><%= label_tag '権限' %></th>
+      <td><%=  d>
+    </tr>
+<!-- Uncomment this if you want this functionality
+<p><%= label_tag 'remember_me', 'Remember me' %>
+<%= check_box_tag 'remember_me', '1', @remember_me %></p>
+-->
+  </tbody>
+</table>
+<p><%= submit_tag 'ログイン' %></p>
+
+<% end -%>
+
+</div>

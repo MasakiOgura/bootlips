@@ -1,5 +1,5 @@
 <div class="sectionh2 index">
-  <h2>××さんのタスク一覧</h2>
+  <h2><span><%= session[:userName] %>さんのタスク一覧</span></h2>
   <%= render(:partial => "common")  %>
   <table cellspacing="0">
     <tbody>
