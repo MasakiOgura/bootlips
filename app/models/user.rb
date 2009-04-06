@@ -3,6 +3,7 @@ require 'digest/sha1'
 class User < ActiveRecord::Base
   belongs_to :task
   has_one :authority
+  has_one :user_status
 
   include Authentication
   include Authentication::ByPassword

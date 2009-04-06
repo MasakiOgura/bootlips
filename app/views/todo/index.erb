@@ -1,21 +1,21 @@
-<div class="sectionh2 index">
+<div class="sectionh2 list">
   <h2><span><%= session[:userName] %>さんのタスク一覧</span></h2>
   <%= render(:partial => "common")  %>
   <table cellspacing="0">
     <tbody>
       <tr>
-        <th class="task" scope="col">タスク</th>
-        <th class="due" scope="col">期限</th>
-        <th class="status" scope="col">ステータス</th>
-        <th class="finish" scope="col">完了?</th>
+        <th>タスク</th>
+        <th>期限</th>
+        <th>ステータス</th>
+        <th>完了?</th>
       </tr>
 <% for task in @tasks -%>
   <% if task.task_status_id != 0 %>
      <tr>
-       <th><%= link_to((task.name), :action => :edit, :id => task) %></th>
-       <th><%= h(task.due) %></th>
-       <th><%= h(task.task_status_id) %></th>
-       <th><%= link_to 'x', {:action => :delete,  :id => task },{:confirm => "完了します", :method => "post" }%></th>
+       <td><%= link_to((task.name), :action => :edit, :id => task) %></td>
+       <td><%= h(task.due) %></td>
+       <td><%= h(task.task_status_id) %></td>
+       <td><%= link_to 'x', {:action => :delete,  :id => task },{:confirm => "完了します", :method => "post" }%></td>
      </tr>
   <% end %>
 <% end %>

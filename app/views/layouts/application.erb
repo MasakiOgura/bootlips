@@ -16,7 +16,7 @@
 <link rev="made" href="http://www.needswell.com" />
 <link rel="start contents" href="http://www.needswell.com/" />
 
-<%= stylesheet_link_tag 'common', 'sec' %>
+<%= stylesheet_link_tag 'importCommon' %>
 <link href="" title="Recent Entries" type="application/atom+xml" rel="alternate" />
 <link href="" title="RSD" type="application/rsd+xml" rel="EditURI" />
 <script type="text/javascript" src="./js/jquery.js"></script>
@@ -57,9 +57,8 @@
           <%= yield :layout  %>
         </div><!-- main -->
 
-        <div id="sidebar">
-          サイドバー
-        </div>
+        <%= render :partial => 'layouts/sidebar' %>
+        
       </div><!-- cont -->
     </div><!-- contwrap -->
 

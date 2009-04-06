@@ -1,5 +1,5 @@
 class TodoController < ApplicationController
-
+  before_filter :login_required
   
   def index
     @tasks = Task.find_tasks(session[:userID])
@@ -24,6 +24,15 @@ class TodoController < ApplicationController
   end
 
   def create
+    @task = Task.new(params[:id])
+    @task.user_id = session[:userID]
+
+    if @task.save
+      redirect_to :action => "index"
+    end
+  end
+
+  def update
     @task = Task.new(params[:task])
     @task.user_id = session[:userID]
 

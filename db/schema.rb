@@ -42,6 +42,14 @@ ActiveRecord::Schema.define(:version => 20090401063235) do
 
   add_index "tasks", ["user_id"], :name => "fk_task_users"
 
+  create_table "user_statuses", :force => true do |t|
+    t.integer  "status_id",   :null => false
+    t.string   "status_name", :null => false
+    t.string   "image_path",  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", :force => true do |t|
     t.string   "login",                     :limit => 40
     t.string   "name",                      :limit => 100, :default => ""
@@ -52,10 +60,12 @@ ActiveRecord::Schema.define(:version => 20090401063235) do
     t.datetime "updated_at"
     t.string   "remember_token",            :limit => 40
     t.datetime "remember_token_expires_at"
-    t.integer  "authority_id"
+    t.integer  "authority_id",                                             :null => false
+    t.integer  "user_status_id"
   end
 
   add_index "users", ["authority_id"], :name => "fk_user_authorities"
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true
+  add_index "users", ["user_status_id"], :name => "fk_user_user_statuses"
 
 end

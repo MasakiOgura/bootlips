@@ -1,0 +1,19 @@
+<div id="sidebar">
+  <div class="sectionh2 firstchild">
+    <h2>[プロジェクト管理]</h2>
+    <ul>
+      <li class="firstchild"><%= link_to '作成', :controller => 'project', :action => 'create' %> </li>
+      <li><%= link_to '一覧表示/削除', :controller => 'project', :action => 'index' %> </li>
+    </ul>
+  </div>
+  <% if session[:userAuth] %>
+  <div class="sectionh2">
+    <h2>[ユーザ管理]</h2>
+    <ul>
+      <li class="firstchild"><%= link_to '作成', :controller => 'signup', :action =>'new' %></li>
+      <li><%= link_to '一覧表示/削除', :controller => 'signup', :action => 'list' %></li>
+    </ul>
+  </div>
+  <% end %>
+  </div>
+</div>
