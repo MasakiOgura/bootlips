@@ -20,11 +20,10 @@ class TodoController < ApplicationController
 
   def edit
     @task = Task.find(params[:id])
-
   end
 
   def create
-    @task = Task.new(params[:id])
+    @task = Task.new(params[:task])
     @task.user_id = session[:userID]
 
     if @task.save
@@ -33,10 +32,10 @@ class TodoController < ApplicationController
   end
 
   def update
-    @task = Task.new(params[:task])
+    @task = Task.find(params[:id])
     @task.user_id = session[:userID]
-
-    if @task.save
+    
+    if @task.update_attributes(params[:task])
       redirect_to :action => "index"
     end
   end
