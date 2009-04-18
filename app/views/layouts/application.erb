@@ -34,7 +34,7 @@
         <% else %>
           <%= link_to 'ログイン', :controller => 'sessions', :action => 'new'%>
         <% end %>
-        <% if session[:userAuth] %>
+        <% if session[:userAuth] == 1 %>
           | <%= link_to '管理', :controller => 'users', :action => 'new' %>
         <% end %>
         | グループ移動

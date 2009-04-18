@@ -1,4 +1,4 @@
-<div class="sectionh2">
+<div class="sectionh2 form">
 <h2><span>SignUp</span></h2>
 <% @user.password = @user.password_confirmation = nil %>
 
@@ -24,7 +24,7 @@
       </tr>
       <tr>
         <th><%= label_tag '権限' %></th>
-        <td><%= f.collection_select("authority_id", Authorities.find(:all), :id, :authority_name) %></td>
+        <td><%= f.select :user_authority, User::AUTHORITY_TYPE, :prompt => "権限を選択してください" %></td>
       </tr>
 
     </tbody>

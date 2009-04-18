@@ -1,2 +1,22 @@
-<h1>Project#index</h1>
-<p>Find me in app/views/project/index.html.erb</p>
+<div class="sectionh2 list">
+<%= render(:partial => "common")  %>
+  <h2><span><%= session[:userName] %>さんのプロジェクト一覧</span></h2>
+  <table cellspacing="0">
+    <tbody>
+      <tr>
+        <th>プロジェクト</th>
+        <th>管理ユーザ</th>
+        <th>所属ユーザ</th>
+        <th>削除</th>
+      </tr>
+<% for project in @projects -%>
+     <tr>
+       <td><%= link_to((project.name), :action => :edit, :id => project) %></td>
+       <td><%=  project.users[0][:login] %></td>
+       <td></td>
+       <td><%= link_to 'x', {:action => :delete,  :id => project },{:confirm => "完了します", :method => "post" }%></td>
+     </tr>
+<% end %>
+    </tbody>
+  </table>
+</div>

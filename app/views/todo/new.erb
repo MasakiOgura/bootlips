@@ -1,6 +1,7 @@
-<div class="sectionh2">
+<div class="sectionh2 form">
   <h2>タスクの追加</h2>
-<% form_for (:task, :url => {:action => "create"}) do |form| %>
+  <%= error_messages_for :task %>
+<% form_for(:task, :url => {:action => "create"}) do |form| %>
   <table class="tbl_frame">
     <tbody>
       <tr>
@@ -13,11 +14,12 @@
       </tr>
       <tr>
         <th>タグ</th>
-        <td><%= form.text_field :tag_id %></td>
+        <td><%= form.text_field :tag_list %></td>
+        <%= hidden_field :user_id, :value => session[:userID] %>
       </tr>
       <tr>
         <th>リスト(あとで消す)</th>
-        <td><%= form.text_field :list_id %></td>
+        <td><%= select(:task, :list_id, List.find(:all, :conditions => ["user_id = ?", session[:userID]]).collect{|i| [i.name, i.id]} + [["", 0]]) %></td>
       </tr>
       <tr>
         <th>期限</th>
@@ -25,7 +27,7 @@
       </tr>
       <tr>
         <th>ステータス</th>
-        <td><%= form.text_field :task_status_id %></td>
+        <td><%= form.select :task_status, Task::TASK_STATUSES %></td>
       </tr>
 
     </tbody>

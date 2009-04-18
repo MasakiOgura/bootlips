@@ -21,7 +21,7 @@ class SessionsController < ApplicationController
       handle_remember_cookie! new_cookie_flag
       session[:userID] = user.id
       session[:userName] = user.login
-      session[:userAuth] = user.authority_id
+      session[:userAuth] = user.user_authority
       #redirect_back_or_default('/')
       flash[:notice] = "ようこそ#{user.login}"
       redirect_to :controller => 'todo'

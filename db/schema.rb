@@ -9,11 +9,31 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090401063235) do
+ActiveRecord::Schema.define(:version => 20090413052254) do
 
-  create_table "authorities", :force => true do |t|
-    t.integer  "authority_id",   :null => false
-    t.string   "authority_name", :null => false
+  create_table "lists", :force => true do |t|
+    t.string   "name",       :null => false
+    t.integer  "user_id",    :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "lmembers", :force => true do |t|
+    t.integer  "user_id",    :null => false
+    t.integer  "list_id",    :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "members", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "projects", :force => true do |t|
+    t.string   "name",       :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -28,27 +48,39 @@ ActiveRecord::Schema.define(:version => 20090401063235) do
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
+  create_table "taggings", :force => true do |t|
+    t.integer "tag_id"
+    t.integer "taggable_id"
+    t.string  "taggable_type"
+    t.integer "user_id"
+  end
+
+  add_index "taggings", ["tag_id", "taggable_type"], :name => "index_taggings_on_tag_id_and_taggable_type"
+  add_index "taggings", ["taggable_id", "taggable_type"], :name => "index_taggings_on_taggable_id_and_taggable_type"
+  add_index "taggings", ["user_id", "tag_id", "taggable_type"], :name => "index_taggings_on_user_id_and_tag_id_and_taggable_type"
+  add_index "taggings", ["user_id", "taggable_id", "taggable_type"], :name => "index_taggings_on_user_id_and_taggable_id_and_taggable_type"
+
+  create_table "tags", :force => true do |t|
+    t.string  "name"
+    t.integer "taggings_count", :default => 0, :null => false
+  end
+
+  add_index "tags", ["name"], :name => "index_tags_on_name"
+  add_index "tags", ["taggings_count"], :name => "index_tags_on_taggings_count"
+
   create_table "tasks", :force => true do |t|
-    t.string   "name",           :null => false
+    t.string   "name",        :null => false
     t.string   "memo"
-    t.integer  "list_id",        :null => false
-    t.integer  "user_id",        :null => false
-    t.integer  "tag_id"
+    t.integer  "list_id"
+    t.integer  "user_id",     :null => false
+    t.string   "tag_list"
     t.date     "due"
-    t.integer  "task_status_id", :null => false
+    t.integer  "task_status", :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "tasks", ["user_id"], :name => "fk_task_users"
-
-  create_table "user_statuses", :force => true do |t|
-    t.integer  "status_id",   :null => false
-    t.string   "status_name", :null => false
-    t.string   "image_path",  :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "users", :force => true do |t|
     t.string   "login",                     :limit => 40
@@ -60,12 +92,11 @@ ActiveRecord::Schema.define(:version => 20090401063235) do
     t.datetime "updated_at"
     t.string   "remember_token",            :limit => 40
     t.datetime "remember_token_expires_at"
-    t.integer  "authority_id",                                             :null => false
+    t.integer  "user_authority",                                           :null => false
     t.integer  "user_status_id"
+    t.integer  "test"
   end
 
-  add_index "users", ["authority_id"], :name => "fk_user_authorities"
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true
-  add_index "users", ["user_status_id"], :name => "fk_user_user_statuses"
 
 end

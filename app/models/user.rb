@@ -1,10 +1,27 @@
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
-  belongs_to :task
-  has_one :authority
-  has_one :user_status
+  # 権限一覧
+  AUTHORITY_TYPE = [
+    # 表示      DB
+    [ "管理者", "1"],
+    [ "一般", "0"]
+  ]
 
+  # For acts_as_taggable_redux
+  acts_as_tagger
+
+  # For relationship
+  belongs_to :task
+  has_many :members
+  has_many :projects, :through => :members
+
+  has_many :lmembers
+  has_many :lists, :through => :lmembers
+
+  #
+  #attr_reader :login
+  
   include Authentication
   include Authentication::ByPassword
   include Authentication::ByCookieToken
@@ -27,7 +44,7 @@ class User < ActiveRecord::Base
   # HACK HACK HACK -- how to do attr_accessible from here?
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
-  attr_accessible :login, :email, :name, :password, :password_confirmation, :authority_id
+  attr_accessible :login, :email, :name, :password, :password_confirmation, :user_authority
 
 
 

@@ -1,5 +1,6 @@
 <div class="sectionh2 form">
   <h2>タスクの編集</h2>
+  <%= error_messages_for :task %>
 <% form_tag  :action => "update", :id => @task do %>
   <table class="tbl_frame">
     <tbody>
@@ -13,11 +14,12 @@
       </tr>
       <tr>
         <th>タグ</th>
-        <td><%= text_field :task, :tag_id %></td>
+        <td><%= text_field :task, :tag_list, :value => @task.tag_list(current_user) %></td>
+        <%#= hidden_field :task, session[:user_id], :value => current_user.id %>
       </tr>
       <tr>
         <th>リスト(あとで消す)</th>
-        <td><%= text_field :task, :list_id %></td>
+        <td><%= select(:task, :list_id, List.find(:all, :conditions => ["user_id = ?", session[:userID]]).collect{|i| [i.name, i.id]}) %></td>
       </tr>
       <tr>
         <th>期限</th>
@@ -25,9 +27,8 @@
       </tr>
       <tr>
         <th>ステータス</th>
-        <td><%= text_field :task, :task_status_id %></td>
+        <td><%= select :task, :task_status, Task::TASK_STATUSES %></td>
       </tr>
-
     </tbody>
   </table>
   <%= submit_tag %>
